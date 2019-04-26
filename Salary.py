@@ -1,33 +1,22 @@
 import tkinter as tk
-import tkinter.filedialog as dialog
-from openpyxl import Workbook, load_workbook
-
-# Code to add widgets will go here...
-
-class Reader():
-    def __init__(self, filename):
-        wb = load_workbook(filename)
-
+import tkinter.filedialog as filedialog
 
 class App(tk.Frame):
+
     def __init__(self, master=None):
         super().__init__(master)
         self.master = master
-        self.path_string_title = tk.Label(window, text="File name: ", height=1)
-        # self.path_string_title.grid()
-        self.path_string = tk.Entry(window, width=50)
-        # self.path_string.grid()
-        self.open_file = tk.Button(window, text="Browse...", command=lambda: self.select_file())
-        # self.open_file.grid()
-        self.pack()
-        self.path_string_title.pack(side="left")
-        self.path_string.pack(side="left")
-        self.open_file.pack(side="left")
+        string_label = tk.Label(master, text="File name: ")
+        address_string = tk.Entry(master, width=50)
+        open_button = tk.Button(master, text="Browse...", command=lambda: self.open_file())
+        string_label.pack(side="left")
+        address_string.pack(side="left")
+        open_button.pack(side="right")
 
-    def select_file(self):
-        filename = dialog.askopenfilename()
-        self.path_string.insert(0, filename)
+    def open_file(self):
+        filename = filedialog.askopenfilename()
+        address_string.insert(0, filename)
 
 window = tk.Tk()
-app = App(master=window)
+app = App(window)
 app.mainloop()
